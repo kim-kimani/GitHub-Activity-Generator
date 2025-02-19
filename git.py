@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import os
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta, date
 from random import randint
 from subprocess import Popen
 import sys
@@ -36,15 +35,26 @@ def main(def_args=sys.argv[1:]):
 
     if user_email is not None:
         run(['git', 'config', 'user.email', user_email])
+        
+        
+    # Specific day commits
+    target_date = date(2025, 2, 19)  # Set target date (2025 for this year)
+    curr_year = datetime.now().year
 
-    start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
-    for day in (start_date + timedelta(n) for n
-                in range(days_before + days_after)):
-        if (not no_weekends or day.weekday() < 5) \
-                and randint(0, 100) < frequency:
-            for commit_time in (day + timedelta(minutes=m)
-                                for m in range(contributions_per_day(args))):
-                contribute(commit_time)
+    # Ensure the script only commits on February 19th of the current year
+    if target_date.year == curr_year:
+        commit_time = datetime(target_date.year, target_date.month, target_date.day, 14, 0)  # Set commit time
+        contribute(commit_time)
+
+
+    # start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
+    # for day in (start_date + timedelta(n) for n
+    #             in range(days_before + days_after)):
+    #     if (not no_weekends or day.weekday() < 5) \
+    #             and randint(0, 100) < frequency:
+    #         for commit_time in (day + timedelta(minutes=m)
+    #                             for m in range(contributions_per_day(args))):
+    #             contribute(commit_time)
 
     if repository is not None:
         run(['git', 'remote', 'add', 'origin', repository])
