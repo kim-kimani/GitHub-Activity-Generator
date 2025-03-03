@@ -2,7 +2,7 @@
 
 ## Gitter build: Adds commits on the dates you choose in an existing file
 
-A script that helps you instantly generate a beautiful GitHub Contributions Graph for the last year.
+A script that helps you instantly generate a beautiful GitHub Contributions Graph for the period of your choice.
 
 ⚠ **Disclaimer**  
 This script is for educational purposes and demonstrating GitHub mechanics. It should not be used to misrepresent professional contributions or coding activity.
